@@ -52,6 +52,7 @@ namespace Inventory
 
             if (productException || quantException || priceException) {
                 MessageBox.Show("Inputs are not accepted nor added to the data grid....");
+                productException = false; quantException = false; priceException = false;
             } else
             {
                 MessageBox.Show("User product info has been added!");
@@ -66,7 +67,7 @@ namespace Inventory
         {
             try
             {
-                if (string.IsNullOrEmpty(name) || !Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+                if (string.IsNullOrWhiteSpace(name) || !Regex.IsMatch(name, @"^[a-zA-Z]+$"))
                 {
                     throw new StringFormatException(StringFormatException.message);
                 }
@@ -138,7 +139,7 @@ namespace Inventory
     {
         public static string message;
         public StringFormatException(string str) : base(str) {
-            message = "Product name cannot be empty.";
+            message = "Invalid product name format.";
         }
         public new string Message()
         {
